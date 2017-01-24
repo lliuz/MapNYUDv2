@@ -1,9 +1,9 @@
 addpath('./matlab_utils')
 
-load('benchmarkData/metadata/classMapping40.mat')
+load('../benchmarkData/metadata/classMapping40.mat')
 
-label_dir = 'benchmarkData/groundTruth';
-output_dir = 'benchmarkData/groundTruth40cls';
+label_dir = '../benchmarkData/groundTruth';
+output_dir = '../benchmarkData/groundTruth40cls';
 mkdir_notexist(output_dir);
 
 mapClass = [255, mapClass];
@@ -14,7 +14,7 @@ for i = 1:length(raw_label_files)
     file_name = raw_label_files{i};
     file_path = fullfile(label_dir, raw_label_files{i});
     one_file = load(file_path);
-    raw_label = one_file.groundTruth{1}.Segmentation + 1;
+    raw_label = one_file.groundTruth{1}.SegmentationClass + 1;
     map_label = mapClass(uint16(raw_label));
     assert( all(map_label(:) <= 255) && all(map_label(:) >= 0));
     
